@@ -3,53 +3,65 @@ import { useEffect, useState} from 'react'
 
 import { Home } from '../Home';
 import { Info } from '../Info';
+import { Searcher } from '../Searcher';
 
 import './App.css';
 
-const basePeopleUrl = 'https://swapi.dev/api/people/?format=json'
+const BASE_URL = 'https://swapi.dev/api/people'
 
 export function App() {
-  const [startCharacters, setStartCharacters] = useState([])
-  const [allCharacters, setAllCharacters] = useState([])
+  const [startHeroes, setStartHeroes] = useState([]);
+  const [endHeroes, setEndHeroes] = useState([]);
+  const [maxHerosPage, setMaxHeroPage] = useState(10)
 
-  const loadData = async (url) =>{
-    const res = await fetch(url)
-    const data = await res.json()
-    return data 
-}
-
-  useEffect(()=>{
-    loadStartCharacters();
-    //loadAllCharacters()
-  }, [])
+  useEffect(() => {
+    loadStateHeroes();
+  }, []);
 
 
-async function loadStartCharacters(){
-  const data = await loadData(basePeopleUrl)
-  setStartCharacters(data)
-}
-
-async function loadAllCharacters(){
-
-  const loadedHeroes = []
-  let currentLoadedObject = startCharacters
-
-  while(startCharacters && startCharacters.next){
-    const currLoadUrl = `${basePeopleUrl}/?page=${currentLoadedObject.next}`
-    const data = await fetch(currLoadUrl)
-    debugger
-    loadedHeroes.push(data)
-    currentLoadedObject = data
+  function loadStateHeroes() {
+    fetch(BASE_URL)
+      .then(response => response.json())
+      .then(data => {
+        setStartHeroes(data.results.map(result => slugify(result)));
+        loadEndHeroes(data);
+      })
   }
-  console.log(loadedHeroes)
-}
+
+  async function loadEndHeroes(startLoadingObj) {
+    const loadedHeroes = [];
+    let currLoadingObj = startLoadingObj;
+    setMaxHeroPage(Math.ceil(startLoadingObj.count / 10))
+
+    while (currLoadingObj?.next) {
+      currLoadingObj = await fetch(currLoadingObj.next).then(response => response.json());
+      loadedHeroes.push(...currLoadingObj.results.map(result => slugify(result)));
+    }
+
+    setEndHeroes(loadedHeroes)
+  }
+
+  function slugify(heroObject) {
+
+    const slug = heroObject.name.toLowerCase().split(' ').join('-');
+
+    return {
+      ...heroObject,
+      slug
+    }
+  }
 
   return (
     <div className="App">
       <Router>
+        <div>
+          <Searcher startHeroes={startHeroes} endHeroes={endHeroes} />
+        </div>
         <Routes>
-          <Route path='/home' element={<Home startCharacters={startCharacters?.results} />}/>
-          <Route path='/info' element={<Info/>}/>
+          <Route path='/' element={<Home startHeroes={startHeroes} endHeroes={endHeroes} maxHerosPage={maxHerosPage} />} >
+            <Route path='/:page' element={<Home startHeroes={startHeroes} endHeroes={endHeroes} />} />
+          </Route>
+          <Route path='/info/:slug' element={<Info startHeroes={startHeroes} endHeroes={endHeroes} />}/>
         </Routes>
       </Router>
     </div>
