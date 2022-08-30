@@ -3,9 +3,8 @@ import { useEffect, useState} from 'react'
 
 import { Home } from '../Home';
 import { Info } from '../Info';
-import { Searcher } from '../Searcher';
 
-import './App.css';
+import './App.scss';
 
 
 const BASE_URL = 'https://swapi.dev/api/people'
@@ -13,7 +12,7 @@ const BASE_URL = 'https://swapi.dev/api/people'
 export function App() {
   const [startHeroes, setStartHeroes] = useState([]);
   const [endHeroes, setEndHeroes] = useState([]);
-  const [maxHerosPage, setMaxHeroPage] = useState(10)
+  const [maxHerosPage, setMaxHeroPage] = useState(10);
 
   useEffect(() => {
     loadStateHeroes();
@@ -53,11 +52,9 @@ export function App() {
   }
 
   return (
+    <div className="App">
     <div className="justify-content">
       <Router>
-      <div className="flex-start">
-          <Searcher startHeroes={startHeroes} endHeroes={endHeroes} />
-      </div>
         <Routes>
           <Route path='/' element={<Home startHeroes={startHeroes} endHeroes={endHeroes} maxHerosPage={maxHerosPage} />} >
             <Route path='/:page' element={<Home startHeroes={startHeroes} endHeroes={endHeroes} />} />
@@ -66,6 +63,8 @@ export function App() {
         </Routes>
       </Router>
       </div>
+    </div>
+
   );
 }
 

@@ -3,45 +3,28 @@
     font-family: 'StarWars';
     src: url('./Stjldbl1.ttf')  format('truetype')/* Safari, Android, iOS */
   }
- @keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-    0% {
-        color: #ffe600;
-    }
-    25%{
-        color: #ffffff;
-    }
-    100%{
-        color: #ffaa00;
-    }
-    75%{
-        color: #91ff00;
-    }
-}
- 
 
- .Home {
-    background: linear-gradient(-65deg, #00465d,#356c33, #3b0056,#2d004b, #13008c, rgb(0, 0, 0));
-	background-size: 400% 400%;
-	animation: gradient 35s ease infinite;
-	height: 100%;
- }
+.center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .start {
+    display: flex;
+    justify-content: start;
+  }
+
+  .end{
+      display: flex;
+      justify-content: end;
+  }
 
 .Home-Title{
+    color: #ffaa00;
     font-family:'StarWars';
-    animation: gradient 10s ease infinite;
     text-shadow: 4px 4px 8px #000000;
   }
 
   .Home-Hero{
-    font-size: 37px;
-    
+    font-size: 30px;
   }

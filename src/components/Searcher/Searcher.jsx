@@ -33,6 +33,8 @@ export function Searcher({ startHeroes, endHeroes}) {
             value={search}
             placeholder="Search Hero"
             onChange={handleSearchChange}
+            class="form-control form-control-lg place"
+            
         />
         {suggestionList.length && (
             <ul>

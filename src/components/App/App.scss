@@ -1,0 +1,33 @@
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+li{
+  margin-bottom: 50px;
+  padding: 20px;
+  border: 1px solid black;
+}
+
+ul{
+  list-style: none;
+}
+
+.App{
+  background: linear-gradient(-45deg, #033e20, #000000, #6d1d09);
+	background-size: 400% 400%;
+	animation: gradient 11s ease infinite;
+  height:1070px;
+}
+.suggestionItem {
+  margin: 0;
+  padding: 5px 80px 5px 10px;
+  background: #f4f4f4;
+}
