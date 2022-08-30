@@ -7,6 +7,7 @@ import { Searcher } from '../Searcher';
 
 import './App.css';
 
+
 const BASE_URL = 'https://swapi.dev/api/people'
 
 export function App() {
@@ -52,11 +53,11 @@ export function App() {
   }
 
   return (
-    <div className="App">
+    <div className="justify-content">
       <Router>
-        <div>
+      <div className="flex-start">
           <Searcher startHeroes={startHeroes} endHeroes={endHeroes} />
-        </div>
+      </div>
         <Routes>
           <Route path='/' element={<Home startHeroes={startHeroes} endHeroes={endHeroes} maxHerosPage={maxHerosPage} />} >
             <Route path='/:page' element={<Home startHeroes={startHeroes} endHeroes={endHeroes} />} />
@@ -64,7 +65,7 @@ export function App() {
           <Route path='/info/:slug' element={<Info startHeroes={startHeroes} endHeroes={endHeroes} />}/>
         </Routes>
       </Router>
-    </div>
+      </div>
   );
 }
 

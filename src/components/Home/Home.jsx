@@ -1,10 +1,14 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+import './Home.scss';
+
 
 export function Home({startHeroes, endHeroes, maxHerosPage}) {
   const [displayHeroes, setDispayHeroes] = useState([])
   let params = useParams();
+ 
+
 
   useEffect(() => {
     const formatedPage = params.page ? Number(params.page) : 1;
@@ -21,24 +25,30 @@ export function Home({startHeroes, endHeroes, maxHerosPage}) {
 
   return (
     <div className="Home">
-      <h1>Home</h1>
-      <div>
-        <span>{<Link to={`/${params.page && Number(params.page) > 1 ? Number(params.page) - 1: ''}`} >Prev</Link>}</span>
-        <span>Current: {params.page ? params.page : 1}</span>&nbsp;
-        <span>{<Link to={`/${params.page && Number(params.page) < maxHerosPage - 1 ? Number(params.page) + 1: 2}`} >Next</Link>}</span>
+      <div className="d-flex justify-content-center">
+      <h1 className="Home-Title">Star Wars: Galaxy of Heroes</h1>
       </div>
-
+      <div >
+        <div className="flex-start">
+          <span>{<Link to={`/${params.page && Number(params.page) > 1 ? Number(params.page) - 1: ''}`} >Prev</Link>}</span>
+          <span>Current: {params.page ? params.page : 1}</span>&nbsp;
+          <span>{<Link to={`/${params.page && Number(params.page) < maxHerosPage - 1 ? Number(params.page) + 1: 2}`} >Next</Link>}</span>
+        </div>
+        <div className="flex-centr">
       {displayHeroes?.length && (
-          <ul>
+          <ul  className="list-group-flush ">
           {
               displayHeroes.map(characterObject => (
-                  <li key={characterObject.name}>
+                  <li className="Home-Hero list-group-item" key={characterObject.name}>
                     <Link to={`info/${characterObject.slug}`} >{characterObject.name}</Link>
                   </li>
               ))
           }
       </ul>
       )}
+        </div>
+      </div>
+      
 
     </div>
   );

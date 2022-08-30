@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import '../Home/Home.scss';
+
 export function Searcher({ startHeroes, endHeroes}) {
     const [search, setSeach] = useState('');
     const [suggestionList, setSuggestionList] = useState([])
@@ -41,7 +43,7 @@ export function Searcher({ startHeroes, endHeroes}) {
                 ))}
             </ul>
         )}
-      </div>
+          </div>
     );
   }
   
