@@ -1,5 +1,7 @@
 # Star Wars API
-This project was this project is designed to render data from https://swapi.dev/
+This project is designed to render data from https://swapi.dev/
+It is developed on React js technology.
+Here I actively use the sass and bootstrap library for styling, which will allow you to immerse yourself in the world of Star Wars with maximum realism.
 
 ## Available Scripts
 
