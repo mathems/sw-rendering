@@ -1,0 +1,105 @@
+.Navigation {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'StarWars';
+
+  & a {
+    width: 100%;
+    max-width: 50px;
+    display: block;
+    text-decoration: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: relative;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &.active {
+      &::after {
+        content: '';
+        position: absolute;
+        top: calc(100% + 5px);
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: #00a0e9;
+      }
+    }
+  }
+
+  &__item-icon-wrapper {
+    width: 100%;
+    max-width: 30px; 
+    padding-top: 30px;
+    position: relative;
+  }
+
+  &__item-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    &--planet {
+      background-image: url('/assets/media/navigation/planet.png');
+    }
+
+    &--people {
+      background-image: url('/assets/media/navigation/people.png');
+    }
+
+    &--starship {
+      background-image: url('/assets/media/navigation/starship.png');
+    }
+  }
+
+  &__item-text {
+    color: #ffaa00;
+    font-size: 22px;
+    letter-spacing: 3px;
+    display: none;
+  }
+
+  &.open {
+    padding-top: 10%;
+
+    & a {
+      max-width: 300px;
+    }
+
+    .Navigation__item {
+
+    }
+
+    .Navigation__item-icon-wrapper {
+      max-width: 300px;
+      padding-top: 300px;
+    }
+
+    .Navigation__item-text {
+      display: block;
+    }
+  }
+}
